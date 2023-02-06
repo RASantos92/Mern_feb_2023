@@ -15,6 +15,8 @@ let videoGame = {
 };
 
 let videoGame2 = videoGame;
+
+
 let videoGame3 = {...videoGame};
 
 videoGame3.price = 10;
@@ -24,7 +26,7 @@ videoGame3.platforms = [...videoGame.platforms];
 
 
 let {title , studio} = videoGame;
-// console.log(whatever, studio)
+console.log(title, studio)
 
 let iceCreamFlavors = ["vanilla bean", "mint chocolate chip", "cookie dough"];
 
