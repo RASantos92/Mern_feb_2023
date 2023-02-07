@@ -1,7 +1,5 @@
 const numbers = [1, 2, 3, 4, 5];
 
-
-
 const doubleNums = (arr) => {
     let output = [];
     
@@ -11,14 +9,11 @@ const doubleNums = (arr) => {
     
     return output;
 }
+
+
 const doubleNums1 = (arr) => {
-    const callBack = (number) => {
-        return number * 2
-    }
-    return arr.map(callBack)
+    return arr.map((number)=> number * 2)
 }
-
-
 
 console.log(numbers.map((number) => number * 5))
 console.log(numbers)
