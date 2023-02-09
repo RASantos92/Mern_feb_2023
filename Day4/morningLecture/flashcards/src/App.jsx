@@ -1,10 +1,14 @@
 
 import './App.css';
 import Flashcards from './components/Flashcards';
+import FlashcardsFunctional from './components/FlashcardsFunctional';
 
 function App() {
   return (
-    <Flashcards/>
+    <div>
+      <Flashcards/>
+      <FlashcardsFunctional test={"test"}/>
+    </div>
   );
 }
 
