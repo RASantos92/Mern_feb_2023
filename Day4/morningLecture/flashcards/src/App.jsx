@@ -1,13 +1,31 @@
 
 import './App.css';
-import Flashcards from './components/Flashcards';
+import CardFrom from './components/CardFrom';
+import Flashcards from './data/flashcards.json';
 import FlashcardsFunctional from './components/FlashcardsFunctional';
+import {useState} from "react"
 
 function App() {
+  const [stateFlashcards,setFlashcards] = useState(Flashcards);
+
+  const handleUpdate = (updatedCards) => {
+    setFlashcards(updatedCards)
+  }
+
+  const handleCreate = (card) => {
+    setFlashcards([card , ...stateFlashcards ])
+  }
+
+  const handleDelete = (updatedCards) => {
+    setFlashcards(updatedCards);
+  }
+
+
   return (
     <div>
-      <Flashcards/>
-      <FlashcardsFunctional test={"test"}/>
+      <CardFrom handleCreate = {handleCreate}/>
+      <hr/>
+      <FlashcardsFunctional propsFlashCards = {stateFlashcards}  handleUpdate = {handleUpdate} handleDelete={handleDelete}/>
     </div>
   );
 }

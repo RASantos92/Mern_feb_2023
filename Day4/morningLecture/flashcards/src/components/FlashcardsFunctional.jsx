@@ -1,11 +1,11 @@
 import {useState} from "react"
 import flashcards from "../data/flashcards.json"
 const FlashcardsFunctional = (props) => {
-    const [stateFlashcards,setFlashcards] = useState(flashcards);
+    const {propsFlashCards,handleUpdate, handleDelete} = props
 
 
     const handleFlipCard = (index) => {
-        const updatedFlashcards = stateFlashcards.map((card, i) => {
+        const updatedFlashcards = propsFlashCards.map((card, i) => {
             if(i === index){
                 return {
                     ...card,
@@ -15,7 +15,13 @@ const FlashcardsFunctional = (props) => {
             return card;
         })
 
-        setFlashcards(updatedFlashcards)
+        handleUpdate(updatedFlashcards)
+    }
+
+    const handleDeleteCard = (e,index) => {
+        e.stopPropagation()
+        const updatedCards = propsFlashCards.filter((card,i) => i !== index)
+        handleDelete(updatedCards)
     }
 
     return (
@@ -27,7 +33,7 @@ const FlashcardsFunctional = (props) => {
 
         <main className="flex-row flex-wrap">
             {
-                stateFlashcards.map((card, i) => {
+                propsFlashCards.map((card, i) => {
                     const {category,flipped,back,front} = card;
                     return (
                         <>
@@ -37,6 +43,10 @@ const FlashcardsFunctional = (props) => {
                             {
                                 flipped ? <p>{back}</p> : <p>{front}</p>
                             }
+                            <button 
+                            onClick={(e)=>{
+                                handleDeleteCard(e,i)
+                            }}>Delete</button>
                             </section>
                         </>
                     )
