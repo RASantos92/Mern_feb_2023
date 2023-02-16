@@ -1,0 +1,130 @@
+> show dbs
+admin              0.000GB
+author-db          0.000GB
+authorsv2          0.000GB
+config             0.000GB
+crmdb              0.000GB
+exam_2             0.000GB
+jokes              0.000GB
+jokesV2            0.000GB
+jokesapi           0.000GB
+local              0.000GB
+movies             0.000GB
+mush_love          0.000GB
+music-demo         0.000GB
+myFirstDb          0.000GB
+name_of_your_DB    0.000GB
+pet                0.000GB
+productManager     0.000GB
+productdb          0.000GB
+sundaes_jan2023    0.000GB
+teamManager        0.000GB
+test               0.000GB
+testApp            0.000GB
+thisisnotinmydb    0.000GB
+trip-planner-test  0.000GB
+trips              0.000GB
+user               0.000GB
+widgets            0.000GB
+
+
+> db === show what database you are using at the moment
+test
+> use trip-planner === used to change the database you are using
+                   ===  if the database is not created it will create it.
+switched to db trip-planner
+> db === double checked what db we are using
+trip-planner
+> show collections === show all our collections / tables (sql)
+
+> db.createCollection("destinations") === creating a collection / table (sql)
+{ "ok" : 1 }
+> show collections
+destinations
+> db.createCollection("destination")
+{ "ok" : 1 }
+> show collections
+destination
+destinations
+> db.destination.drop() === deleting a collection
+true
+
+
+> db.destinations.find() === retriving all documents / rows (sql) from the collection
+
+> db.destinations.insert({destination: "Japan", description:"Pet Shibe"}) === inserting a document into a collection.
+WriteResult({ "nInserted" : 1 })
+> db.destinations.insert({destination: "Italy", description:"hiking"})
+WriteResult({ "nInserted" : 1 })
+> db.destinations.find()
+{ "_id" : ObjectId("63ee65757760109bbb3e1760"), "destination" : "Japan", "description" : "eat" }
+{ "_id" : ObjectId("63ee66127760109bbb3e1761"), "destination" : "Japan", "description" : "Pet Shibe" }
+{ "_id" : ObjectId("63ee663e7760109bbb3e1762"), "destination" : "Italy", "description" : "hiking" }
+> db.destinations.find().pretty() === .pretty does what is says makes it nice to look at.
+{
+        "_id" : ObjectId("63ee65757760109bbb3e1760"),
+        "destination" : "Japan",
+        "description" : "eat"
+}
+{
+        "_id" : ObjectId("63ee66127760109bbb3e1761"),
+        "destination" : "Japan",
+        "description" : "Pet Shibe"
+}
+{
+        "_id" : ObjectId("63ee663e7760109bbb3e1762"),
+        "destination" : "Italy",
+        "description" : "hiking"
+}
+
+
+> db.destinations.find({destination: "Japan"}).pretty() === scooped search
+{
+        "_id" : ObjectId("63ee65757760109bbb3e1760"),
+        "destination" : "Japan",
+        "description" : "eat"
+}
+{
+        "_id" : ObjectId("63ee66127760109bbb3e1761"),
+        "destination" : "Japan",
+        "description" : "Pet Shibe"
+}
+
+> db.destinations.remove({destination: "Italy"}) === removing document from collection
+WriteResult({ "nRemoved" : 1 })
+
+> db.destinations.find().pretty()
+{
+        "_id" : ObjectId("63ee65757760109bbb3e1760"),
+        "destination" : "Japan",
+        "description" : "eat"
+}
+>
+> db.destinations.find({_id : ObjectId("63ee65757760109bbb3e1760") }).pretty() === find one document by the _id
+{
+        "_id" : ObjectId("63ee65757760109bbb3e1760"),
+        "destination" : "Japan",
+        "description" : "eat"
+}
+
+> db.destinations.update({_id: ObjectId("63ee65757760109bbb3e1760")}, {description: "eat sushi"})
+WriteResult({ "nMatched" : 1, "nUpserted" : 0, "nModified" : 1 })
+> db.destinations.find().pretty()
+{ "_id" : ObjectId("63ee65757760109bbb3e1760"), "description" : "eat sushi" }
+{
+        "_id" : ObjectId("63ee66127760109bbb3e1761"),
+        "destination" : "Japan",
+>
+> db.destinations.update({destination: "Japan"}, {$set:{descriptio: "eat sushi"}})
+WriteResult({ "nMatched" : 1, "nUpserted" : 0, "nModified" : 1 })
+> db.destinations.find().pretty()
+{ "_id" : ObjectId("63ee65757760109bbb3e1760"), "description" : "eat sushi" }
+{
+        "_id" : ObjectId("63ee66127760109bbb3e1761"),
+        "destination" : "Japan",
+        "description" : "eat sushi",
+}
+>
+
+
+
