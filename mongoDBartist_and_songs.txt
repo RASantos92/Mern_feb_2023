@@ -1,0 +1,80 @@
+> show dbs
+admin              0.000GB
+author-db          0.000GB
+authorsv2          0.000GB
+config             0.000GB
+crmdb              0.000GB
+exam_2             0.000GB
+jokes              0.000GB
+jokesV2            0.000GB
+jokesapi           0.000GB
+local              0.000GB
+movies             0.000GB
+mush_love          0.000GB
+music-demo         0.000GB
+myFirstDb          0.000GB
+name_of_your_DB    0.000GB
+pet                0.000GB
+productManager     0.000GB
+productdb          0.000GB
+sundaes_jan2023    0.000GB
+teamManager        0.000GB
+test               0.000GB
+testApp            0.000GB
+thisisnotinmydb    0.000GB
+trip-planner       0.000GB
+trip-planner-test  0.000GB
+trips              0.000GB
+user               0.000GB
+widgets            0.000GB
+> use artist_and_songs
+switched to db artist_and_songs
+> db.artist.insertOne({name: "Hanson", songs: []})
+{
+        "acknowledged" : true,
+        "insertedId" : ObjectId("63ee9c7c34a9f7cef8bc4dc0")
+}
+> db.artist.find().pretty()
+{
+        "_id" : ObjectId("63ee9c7c34a9f7cef8bc4dc0"),
+        "name" : "Hanson",
+        "songs" : [ ]
+}
+> db.song.insertOne({title: "mmmbob", above330: true, youtubeMedia: "NHozn0YXAeE"})
+{
+        "acknowledged" : true,
+        "insertedId" : ObjectId("63ee9d1834a9f7cef8bc4dc1")
+}
+> db.song.find().pretty()
+{
+        "_id" : ObjectId("63ee9d1834a9f7cef8bc4dc1"),
+        "title" : "mmmbob",
+        "above330" : true,
+        "youtubeMedia" : "NHozn0YXAeE"
+}
+> db.artist.update({_id: ObjectId("63ee9c7c34a9f7cef8bc4dc0")},{$push: {songs : ObjectId("63ee9d1834a9f7cef8bc4dc1")}})
+WriteResult({ "nMatched" : 1, "nUpserted" : 0, "nModified" : 1 })
+> db.artist.find().pretty()
+{
+        "_id" : ObjectId("63ee9c7c34a9f7cef8bc4dc0"),
+        "name" : "Hanson",
+        "songs" : [
+                ObjectId("63ee9d1834a9f7cef8bc4dc1")
+        ]
+}
+> db.artist.update({_id: ObjectId("63ee9c7c34a9f7cef8bc4dc0")},{$push: {songs : {title: "Annalie", above330: true, youtubeMedia: "uCq-yvt94mU"}}})
+WriteResult({ "nMatched" : 1, "nUpserted" : 0, "nModified" : 1 })
+> db.artist.find().pretty()
+{
+        "_id" : ObjectId("63ee9c7c34a9f7cef8bc4dc0"),
+        "name" : "Hanson",
+        "songs" : [
+                ObjectId("63ee9d1834a9f7cef8bc4dc1"),
+                {
+                        "title" : "Annalie",
+                        "above330" : true,
+                        "youtubeMedia" : "uCq-yvt94mU"
+                }
+        ]
+}
+>

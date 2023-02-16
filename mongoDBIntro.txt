@@ -35,6 +35,7 @@ test
 switched to db trip-planner
 > db === double checked what db we are using
 trip-planner
+
 > show collections === show all our collections / tables (sql)
 
 > db.createCollection("destinations") === creating a collection / table (sql)
