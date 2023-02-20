@@ -19,7 +19,9 @@ stuff that happens in the middle of the the request and response.
 app.use(cors());
 
 app.use(express.json(), express.urlencoded({ extended: true }));
-
+app.get("/api/testing",(req,res)=>{
+    console.log("testing")
+})
 require("./routes/destination.routes")(app)
 
 

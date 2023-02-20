@@ -13,6 +13,19 @@ const AllDestinations = (props) => {
                 console.log(err);
             })
     },[])
+
+    const handleDelete = (id) => {
+        axios.delete("http://localhost:8000/api/destinations/"+id)
+            .then(res => {
+                console.log(res);
+                const filteredDestinations = destinations.filter((destination) => {
+                    return destination._id !== id;
+                });
+                setDestinations(filteredDestinations);
+            }).catch(err => {
+                console.log(err);
+            })
+    }
     return (
         <div className="w-5 mx-auto text-center">
             <h2>Travel Destinations</h2>
@@ -30,6 +43,10 @@ const AllDestinations = (props) => {
                                 {spring && <li className="list-group-item">Spring</li>}
                                 {fall && <li className="list-group-item">Fall</li>}
                             </ul>
+                            <button onClick={()=>{handleDelete(_id)}} className="btn btn-sm btn-outline-danger mx-1">Delete</button>
+                            <Link to={`/destinations/${_id}/edit`}> 
+                                <button className="btn btn-sm btn-outline-warning">Edit</button>
+                            </Link>
                         </div>
                     )
                 })

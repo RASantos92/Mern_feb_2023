@@ -25,7 +25,8 @@ const NewDestination = (props) => {
                 console.log(res);
                 navigate('/destinations')
             }).catch(err => {
-                console.log(err)
+                console.log(err.response?.data?.errors)
+                setErrors(err.response?.data?.errors)
             })
     }
 
@@ -59,6 +60,11 @@ const NewDestination = (props) => {
                         value={formData.location}
                     />
                 </div>
+                {
+                    errors?.location && (
+                        <span className="text-danger">{errors.location?.message}</span>
+                    )
+                }
                 <div className="form-group">
                     <label className="h6">Description</label>
                     <input
@@ -69,6 +75,11 @@ const NewDestination = (props) => {
                         value={formData.description}
                     />
                 </div>
+                {
+                    errors?.description && (
+                        <span className="text-danger">{errors.description?.message}</span>
+                    )
+                }
                 <div className="form-group">
                     <label className="h6">Media URL</label>
                     <input
@@ -79,6 +90,11 @@ const NewDestination = (props) => {
                         value={formData.src}
                     />
                 </div>
+                {
+                    errors?.src && (
+                        <span className="text-danger">{errors.src?.message}</span>
+                    )
+                }
                 <div className="form-group">
                     <label className="h6">Media Type</label>
                     <select 
