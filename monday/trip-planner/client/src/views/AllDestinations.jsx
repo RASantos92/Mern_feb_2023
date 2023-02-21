@@ -26,6 +26,7 @@ const AllDestinations = (props) => {
                 console.log(err);
             })
     }
+    
     return (
         <div className="w-5 mx-auto text-center">
             <h2>Travel Destinations</h2>

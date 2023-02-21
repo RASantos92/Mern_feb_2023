@@ -5,7 +5,7 @@ module.exports.create = (req, res) => {
         .then(newSong => {
             return res.json(newSong)
         }).catch(err => {
-            return res.json(err)
+            return res.status(400).json(err)
         })
 }
 
@@ -45,7 +45,7 @@ module.exports.updateOne = (req, res) => {
             return res.json(updatedSong)
         })
         .catch(err => {
-            return res.json(err)
+            return res.status(400).json(err)
         })
 }
 
